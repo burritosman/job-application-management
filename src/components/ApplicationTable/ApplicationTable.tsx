@@ -6,10 +6,12 @@ type Props = {
 
 function ApplicationTable({ data } : Props) {
     return (
-        <table className="table table-zebra mt-4 mx-4">
+        <div >
+        <div  className="overflow-x-auto mt-4 mx-4">
+        <table className="table table-zebra w-full table-fixed">
             <thead>
                 <tr>
-                    <th>Application ID</th>
+                    <th className="hidden sm:table-cell">Application ID</th>
                     <th>Company</th>
                     <th>Role</th>
                     <th>Status</th>
@@ -17,18 +19,20 @@ function ApplicationTable({ data } : Props) {
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody >
                 {data.map((item) => (
                     <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.company}</td>
-                        <td>{item.role}</td>
-                        <td>{item.status}</td>
-                        <td>{item.date}</td>
+                        <td className="hidden sm:table-cell">{item.id}</td>
+                        <td className="max-w-[100px] truncate">{item.company}</td>
+                        <td className="max-w-[100px] truncate">{item.role}</td>
+                        <td className="max-w-[100px] truncate">{item.status}</td>
+                        <td className="max-w-[100px] truncate">{item.date}</td>
                     </tr>
                 ))}
             </tbody>
         </table>
+        </div>
+        </div>
     );
 }
 

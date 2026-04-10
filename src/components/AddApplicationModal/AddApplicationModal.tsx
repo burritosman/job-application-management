@@ -23,13 +23,12 @@ function AddApplicationModal({onClose, onAdd}: Props) {
         role: "",
         company: "",
         status: APPLICATION_STATUS.APPLIED,
-        date: "",
+        date: new Date().toISOString().split("T")[0],
       });
 
       const [errors, setErrors] = useState({
         role: "",
         company: "",
-        date: "",
       });
 
     // Retrieve auto complete results from service
@@ -82,13 +81,11 @@ function AddApplicationModal({onClose, onAdd}: Props) {
       
         const roleError = validateRequired("role", form.role);
         const companyError = validateRequired("company", form.company);
-        const dateError = validateRequired("date", form.date);
         
-        if (roleError || companyError || dateError) {
+        if (roleError || companyError) {
           setErrors({
             role: roleError,
             company: companyError,
-            date: dateError,
           });
         
           return;

@@ -8,14 +8,14 @@ function Navbar({ onAddClick }: Props) {
     const { isDark, toggleTheme } = useTheme();
     
     return (
-        <div className="navbar bg-base-100 shadow-sm pr-10">
+        <div className="navbar bg-base-100 shadow-sm pr-4 sm:pr-10">
             {/* Navbar title */}
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">Job Application Management</a> 
+                <a className="btn btn-ghost text-l sm:text-xl">Job Application Management</a> 
             </div>
 
             {/* Navbar actions */}
-            <div className="flex-none flex items-center gap-4">
+            <div className="flex-none flex items-center gap-4 border-l pl-4 border-l-base-300 sm:border-none">
                 {/* Dark mode toggle (DaisyUI) */}
                 <label className="swap swap-rotate">
                     <input 
