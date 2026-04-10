@@ -2,14 +2,14 @@
     {
         "id": 1,
         "role": "Software Developer",
-        "company": "Inland Revenue Authority of Singapore",
+        "company": "IRAS",
         "status": "Applied",
         "date": "2026-04-01"
     },
     {
         "id": 2,
         "role": "Business Analyst",
-        "company": "Ministry of Social and Family Development",
+        "company": "MSF",
         "status": "Applied",
         "date": "2026-04-01"
     },

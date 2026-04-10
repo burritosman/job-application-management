@@ -23,10 +23,10 @@ function ApplicationTable({ data } : Props) {
                 {data.map((item) => (
                     <tr key={item.id}>
                         <td className="hidden sm:table-cell">{item.id}</td>
-                        <td className="max-w-[100px] truncate">{item.company}</td>
-                        <td className="max-w-[100px] truncate">{item.role}</td>
-                        <td className="max-w-[100px] truncate">{item.status}</td>
-                        <td className="max-w-[100px] truncate">{item.date}</td>
+                        <td className="max-w-[120px] truncate">{item.company}</td>
+                        <td className="max-w-[120px] truncate">{item.role}</td>
+                        <td className="max-w-[120px] truncate">{item.status}</td>
+                        <td className="max-w-[120px] truncate">{item.date}</td>
                     </tr>
                 ))}
             </tbody>

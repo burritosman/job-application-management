@@ -9,9 +9,10 @@ function Navbar({ onAddClick }: Props) {
     
     return (
         <div className="navbar bg-base-100 shadow-sm pr-4 sm:pr-10">
-            {/* Navbar title */}
+            {/* Navbar title (Truncate on smaller screens) */}
             <div className="flex-1">
-                <a className="btn btn-ghost text-l sm:text-xl">Job Application Management</a> 
+                <a className="btn btn-ghost text-xl hidden sm:inline">Job Application Management</a> 
+                <a className="btn btn-ghost text-xl sm:hidden">Applications</a>
             </div>
 
             {/* Navbar actions */}
