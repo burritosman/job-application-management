@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "role": "Software Developer",
+        "company": "Inland Revenue Authority of Singapore",
+        "status": "Applied",
+        "date": "2026-04-01"
+    },
+    {
+        "id": 2,
+        "role": "Business Analyst",
+        "company": "Ministry of Social and Family Development",
+        "status": "Applied",
+        "date": "2026-04-01"
+    },
+    {
+        "id": 3,
+        "role": "Frontend Developer",
+        "company": "Accenture",
+        "status": "Applied",
+        "date": "2026-04-01"
+    },
+    {
+        "id": 4,
+        "role": "Digital Transformation Engineer",
+        "company": "Air Liquide",
+        "status": "Applied",
+        "date": "2026-04-01"
+    }
+  ]
