@@ -19,6 +19,6 @@ src/
 3. utils/validation.ts to store reusable field validations, simplified to just required validation
 4. Form submit simulates backend call using a service to add application, appends to table
 5. Theme toggle on NavBar, saved when user leaves and reopen page
-6. External API to perform auto complete when user searches for company within the form, use extracted domains to load logo image from Logo.dev cdn 
+6. External API call to clearbit to perform auto complete when user searches for company within the form, use extracted domains to load logo images from Logo.dev cdn 
 7. Deployed on Azure using free plan
 8. Simple mobile responsiveness
