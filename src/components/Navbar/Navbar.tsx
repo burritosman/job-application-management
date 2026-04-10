@@ -8,6 +8,7 @@ function Navbar({ onAddClick }: Props) {
     const { isDark, toggleTheme } = useTheme();
     
     return (
+        // Added simple mobile responsiveness throughout, adjust styles based on tailwind breakpoints e.g. sm:xx
         <div className="navbar bg-base-100 shadow-sm pr-4 sm:pr-10">
             {/* Navbar title (Truncate on smaller screens) */}
             <div className="flex-1">
@@ -46,7 +47,7 @@ function Navbar({ onAddClick }: Props) {
                 
                 {/* "Add Item" (application) */}
                 <button 
-                    className="btn btn-primary" 
+                    className="btn btn-primary shadow-none" 
                     onClick={onAddClick}
                 >
                     Add Application

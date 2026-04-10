@@ -18,17 +18,16 @@ function Home() {
     }, []);
 
     const handleOpenModal = () => setShowModal(true);
-
     const handleCloseModal = () => setShowModal(false);
 
+    // Receive form inputs, and simple id logic to increase by 1 for each new application
     const handleAdd = async (formData: Omit<Application, "id">) => {
         const newApp: Application = {
         id: data.length + 1,
         ...formData,
         };
-
+        
         await addApplication(newApp);
-
         setData((prev) => [...prev, newApp]);
     };
 

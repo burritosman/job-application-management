@@ -4,6 +4,8 @@ import Home from './pages/Home/Home'
 
 function App() {
   return (
+    // Global theme state (light/dark mode) accessible from any component via context
+    // Home: Default page of the application
     <ThemeProvider>
       <Home/>
     </ThemeProvider>

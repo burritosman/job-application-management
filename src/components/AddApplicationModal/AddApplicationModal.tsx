@@ -3,22 +3,19 @@ import type { Application } from "../../types/application";
 import { APPLICATION_STATUS } from "../../utils/constants";
 import { searchCompanies } from "../../services/applicationService";
 import { validateRequired } from "../../utils/validation";
-
+import type { Company } from "../../types/company";
 
 type Props = {
     onClose: () => void;
     onAdd: (data: Omit<Application, "id">) => void;
 };
 
-type Suggestion = {
-    name: string;
-    domain: string;
-};
-
 function AddApplicationModal({onClose, onAdd}: Props) {
-    const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+    const [suggestions, setSuggestions] = useState<Company[]>([]);
+    // To limit api calls for autocompletion only when the field is focused
     const [isFocused, setIsFocused] = useState(false);
 
+    // Set default form values for status and date
     const [form, setForm] = useState({
         role: "",
         company: "",
@@ -26,13 +23,14 @@ function AddApplicationModal({onClose, onAdd}: Props) {
         date: new Date().toISOString().split("T")[0],
       });
 
+    // Store error states to display bottom of form   
       const [errors, setErrors] = useState({
         role: "",
         company: "",
       });
 
     // Retrieve auto complete results from service
-    // Limit rate of API call to once per 3 second, character inputted more than 2
+    // Limit rate of API call, character inputted more than 2
     useEffect(() => {
         if (!isFocused) return; 
 
@@ -42,7 +40,7 @@ function AddApplicationModal({onClose, onAdd}: Props) {
                 return;
             }
             try {
-                // Call API from service
+                // Call API from service, store results in state to be used in UI
                 const results = await searchCompanies(form.company);
                 const mapped = results.map((item: any) => ({
                     name: item.name || item.domain,
@@ -53,14 +51,13 @@ function AddApplicationModal({onClose, onAdd}: Props) {
             } catch (err) {
                 console.error(err);
             }
-        }, 300);
-    
+        }, 500);
         return () => clearTimeout(delay);
     }, [form.company]);
     
+    // Perform validation when user keys in input, update form state
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-
         setForm({
           ...form,
           [name]: value,
@@ -72,16 +69,17 @@ function AddApplicationModal({onClose, onAdd}: Props) {
           ...prev,
           [name]: message,
         }));
-
     };
 
     // Submit: Ensure all fields filled, close modal
     const handleSubmit = (e: React.SubmitEvent) => {
         e.preventDefault();
-      
+        
+        // Validate fields again before submission
         const roleError = validateRequired("role", form.role);
         const companyError = validateRequired("company", form.company);
         
+        // Stop submission process if error is found
         if (roleError || companyError) {
           setErrors({
             role: roleError,
@@ -91,6 +89,7 @@ function AddApplicationModal({onClose, onAdd}: Props) {
           return;
         }
       
+        // Actions on succeed: Close modal and pass data to parent component for mocked processing
         onAdd(form);
         onClose();
       };
@@ -124,6 +123,7 @@ function AddApplicationModal({onClose, onAdd}: Props) {
                             }}
                         />
 
+                        {/* Load retrieved autocomplete suggestions from service, use logo.dev to provide images of retrieved company domain */}
                         {isFocused && suggestions.length > 0 && (
                             <ul className="absolute left-0 w-full z-50 bg-base-100 border rounded mt-1 shadow max-h-40 overflow-y-auto">
                                 {suggestions.map((suggestion) => (
@@ -135,7 +135,7 @@ function AddApplicationModal({onClose, onAdd}: Props) {
                                             setSuggestions([]);
                                         }}
                                     >
-                                        {/* Logo */}
+                                        {/* Logo: formatting to call corresponding domain image properly*/}
                                         <img
                                             src={`https://img.logo.dev/${suggestion.domain}?token=${import.meta.env.VITE_LOGO_API_PUBLISHABLE_KEY}`}
                                             className="w-5 h-5 rounded"
@@ -148,7 +148,7 @@ function AddApplicationModal({onClose, onAdd}: Props) {
                                         <span>{suggestion.name}</span>
                                     </li>
                                 ))}
-                                    {/* Attribution*/}
+                                    {/* Attribution: required to use for free in projects */}
                                 <li className="text-xs text-base-content/50 mx-2 my-2 cursor-default">
                                     <a href="https://logo.dev">Logos provided by Logo.dev</a>
                                 </li>
@@ -195,7 +195,6 @@ function AddApplicationModal({onClose, onAdd}: Props) {
                         <button type="button" className="btn "onClick={onClose}>Cancel</button>
                         <button type="submit" className="btn btn-primary ml-2">Submit</button>
                     </div>
-        
                 </form>
             </div>
         </dialog>
